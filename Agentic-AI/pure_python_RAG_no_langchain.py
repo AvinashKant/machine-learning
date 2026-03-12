@@ -1,17 +1,15 @@
 import requests
-import certifi
+import os
  
-# ============================================
-# API KEY: Get your key from https://aicafe.hcl.com/AICafe/#/tutorials/api-docs
-# ============================================
-API_KEY = "500dc85b-3ee7-4e2e-b231-18d722649036" 
+
+API_KEY = os.getenv("HAPI_KEY") 
  
 # --- Endpoint config ---
 API_URL = (
     "https://aicafe.hcl.com/AICafeService/api/v1/subscription/openai/"
     "deployments/gpt-4.1/chat/completions?api-version=2024-12-01-preview"
 )
- 
+#
 SYSTEM_PROMPT = """
 You are a helpful AI agent.
 - Answer clearly and concisely.

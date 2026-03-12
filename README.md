@@ -6,6 +6,9 @@
 # Generate the requirements.txt
 - pip freeze > requirements.txt
 
+# Install all packages listed in a requirements.txt file
+pip install -r requirements.txt
+
 
 # Run JupyterLab
 jupyter lab
