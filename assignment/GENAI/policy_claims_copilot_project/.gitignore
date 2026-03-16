@@ -1,0 +1,6 @@
+# Logs
+venv
+__pycache__/
+.env
+*.log
+vectorstore
