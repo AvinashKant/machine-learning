@@ -47,7 +47,6 @@ def generate_csv(file_name, schema, total_records, null_percent):
 
     print(f"File '{file_name}' created: {total_records} rows, {null_percent}% nulls ({null_count} cells).")
 
-# --- Configuration ---
 input_schema = {
     "name": "string",
     "age": "integer",
