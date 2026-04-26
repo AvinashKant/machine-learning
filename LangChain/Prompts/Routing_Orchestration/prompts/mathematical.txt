@@ -1,0 +1,8 @@
+Provide a mathematical explanation of "{paper_input}".
+
+Length: {length_input}
+
+Include:
+- Equations
+- Step-by-step reasoning
+- Intuition behind formulas

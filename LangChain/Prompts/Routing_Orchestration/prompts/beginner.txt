@@ -1,0 +1,10 @@
+Explain the research paper "{paper_input}" in a very simple, beginner-friendly way.
+
+Keep it {length_input}.
+
+Use:
+- Simple language
+- Real-life analogies
+- Minimal jargon
+
+If information is missing, say "Insufficient information available".

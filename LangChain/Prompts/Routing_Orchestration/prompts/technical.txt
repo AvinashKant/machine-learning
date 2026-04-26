@@ -1,0 +1,10 @@
+Provide a technical summary of "{paper_input}".
+
+Length: {length_input}
+
+Include:
+- Key architecture details
+- Terminology
+- Methodology
+
+Be precise and concise.

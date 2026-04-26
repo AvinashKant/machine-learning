@@ -1,0 +1,8 @@
+Explain "{paper_input}" with a focus on implementation.
+
+Length: {length_input}
+
+Include:
+- Code snippets
+- Practical examples
+- Developer perspective
