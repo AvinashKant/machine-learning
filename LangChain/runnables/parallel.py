@@ -1,32 +1,57 @@
-from langchain_openai import ChatOpenAI
+import os
+from dotenv import load_dotenv
+
+from langchain_huggingface import HuggingFaceEndpoint, ChatHuggingFace
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from dotenv import load_dotenv
-from langchain.schema.runnable import RunnableSequence, RunnableParallel
+from langchain_core.runnables import RunnableParallel
 
+# Load environment variables
 load_dotenv()
 
+# Prompt for Tweet
 prompt1 = PromptTemplate(
-    template='Generate a tweet about {topic}',
-    input_variables=['topic']
+    template="Generate a tweet about {topic}",
+    input_variables=["topic"]
 )
 
+# Prompt for LinkedIn
 prompt2 = PromptTemplate(
-    template='Generate a Linkedin post about {topic}',
-    input_variables=['topic']
+    template="Generate a LinkedIn post about {topic}",
+    input_variables=["topic"]
 )
 
-model = ChatOpenAI()
+# Hugging Face Model
+llm = HuggingFaceEndpoint(
+    repo_id="Qwen/Qwen2.5-7B-Instruct",
+    task="text-generation",
+    max_new_tokens=512,
+    temperature=0.5,
+    huggingfacehub_api_token=os.getenv("HUGGINGFACEHUB_API_TOKEN")
+)
 
+# Chat wrapper
+model = ChatHuggingFace(llm=llm)
+
+# Output parser
 parser = StrOutputParser()
 
-parallel_chain = RunnableParallel({
-    'tweet': RunnableSequence(prompt1, model, parser),
-    'linkedin': RunnableSequence(prompt2, model, parser)
-})
+# Individual chains
+tweet_chain = prompt1 | model | parser
+linkedin_chain = prompt2 | model | parser
 
-result = parallel_chain.invoke({'topic':'AI'})
+# Parallel chain
+parallel_chain = RunnableParallel(
+    tweet=tweet_chain,
+    linkedin=linkedin_chain
+)
 
-print(result['tweet'])
-print(result['linkedin'])
+# Execute
+result = parallel_chain.invoke({"topic": "AI"})
 
+# Output
+print("\n===== TWEET =====\n")
+print(result["tweet"])
+
+print("\n===== LINKEDIN POST =====\n")
+print(result["linkedin"])
