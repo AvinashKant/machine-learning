@@ -38,7 +38,6 @@ def generate_csv(file_name, schema, total_records, null_percent):
         if data[r][c] != "":
             data[r][c] = "" 
             cells_modified += 1
-
     # 3. Write to CSV
     with open(file_name, mode='w', newline='') as file:
         writer = csv.writer(file)
@@ -53,7 +52,6 @@ input_schema = {
     "is_alive": "boolean", # New Boolean Type
     "score": "float"       # Added for extra utility
 }
-
 generate_csv(
     file_name="output.csv", 
     schema=input_schema, 
